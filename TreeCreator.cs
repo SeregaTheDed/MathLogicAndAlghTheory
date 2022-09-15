@@ -35,6 +35,34 @@ namespace MathLogicAndAlghTheory
             public Node? FirstOperand { get; set; }
             public Node? SecondOperand { get; set; }
             public string? VariableName { get; set; }
+            private void printTreeRecursy(Node node, int depth)
+            {
+                char separator = ' ';
+                if (node.isVariable)
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine(new String(separator, depth*2) + node.VariableName); 
+                }
+                else if (node.isOperationWithOneOperand)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(new String(separator, depth * 2) + node.Operation);
+                    printTreeRecursy(node.FirstOperand, depth+1);
+                }
+                else
+                {
+                    printTreeRecursy(node.FirstOperand, depth + 1);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(new String(separator, depth * 2) + node.Operation);
+                    printTreeRecursy(node.SecondOperand, depth + 1);
+                }
+            }
+            public void printTree()
+            {
+                var originalConsoleColor = Console.ForegroundColor;
+                printTreeRecursy(this, 0);
+                Console.ForegroundColor = originalConsoleColor;
+            }
         }
         private static int findCloseBracketIndex(string[] parts, int indexOfOpenBracket)
         {
@@ -50,92 +78,79 @@ namespace MathLogicAndAlghTheory
             }
             throw new ArgumentException("Input string has non balanced bracket");
         }
-        private static Node createVariable(string variableName)
+        
+        
+        private static int findIndexTwoOperandOperationInRange(string[] parts, int startIndex, int endIndex)
         {
-            return new Node
-            {
-                VariableName = variableName,
-            };
-        }
-        private static Node createOneOperandNode(string[] parts, int startIndex, int endIndex, char operation)
-        {
-            if (startIndex == endIndex)
-            {
-                Node node = createVariable(parts[startIndex]);
-                node.Operation = operation;
-                return node;
-            }
-            else
-            {
-                return new Node
-                {
-                    Operation = operation,
-                    FirstOperand = createNode(parts, startIndex, endIndex),
-                };
-            }
-            
-        }
-        private static int findIndexOperationInRange(string[] parts, int startIndex, int endIndex)
-        {
-            int depht = 1;
+            int depht = 0;
             for (int i = startIndex + 1; i < parts.Length; i++)
             {
                 if (parts[i] == "(")
                     depht++;
                 if (parts[i] == ")")
                     depht--;
-                if (depht == 0 && parts[i].isOperation())
+                if (depht == 0 && parts[i].isTwoOperandOperation())
                     return i;
             }
             return -1;
         }
+        private static int findNextVariableIndex(string[] parts, int startIndex)
+        {
+            for (int i = startIndex; i < parts.Length; i++)
+            {
+                if (parts[i].isVariable())
+                    return i;
+            }
+            return -1;
+        }
+        private static Node createVariableNode(string variableName)
+        {
+            return new Node
+            {
+                VariableName = variableName
+            };
+        }
         private static Node createNode(string[] parts, int startIndex, int endIndex)
         {
-            char Operation = ' ';
-            Node? leftNode = new Node();
-            Node? rightNode = null;
-            int twoOperandOperationIndex = findIndexOperationInRange(parts, startIndex, endIndex);
-            if (twoOperandOperationIndex == -1)
+            if (startIndex == endIndex)
             {
                 if (parts[startIndex].isVariable())
+                    return createVariableNode(parts[startIndex]);
+                else
+                    throw new ArgumentException("Bad parsing");
+            }
+            else if (startIndex < endIndex)
+            {
+                if (parts[startIndex].isBracket())
                 {
-                    leftNode = createVariable(parts[startIndex]);
+                    int operationIndex = findIndexTwoOperandOperationInRange(parts, startIndex, endIndex);
+                    int closeBracketIndex = findCloseBracketIndex(parts, startIndex);
+                    Node leftOperand = createNode(parts, startIndex+1, operationIndex-1);
+                    Node rightOperand = createNode(parts, operationIndex + 1, closeBracketIndex-1);
+                    return new Node
+                    {
+                        FirstOperand = leftOperand,
+                        SecondOperand = rightOperand,
+                        Operation = parts[operationIndex][0],
+                    };
                 }
                 else if (parts[startIndex].isOneOperandOperation())
                 {
-                    if (parts[startIndex + 1].isBracket())
+                    return new Node
                     {
-                        leftNode = createOneOperandNode(
-                            parts,
-                            startIndex + 1,
-                            findCloseBracketIndex(parts, startIndex + 1),
-                            parts[startIndex][0]
-                            );
-                    }
-                    else
-                    {
-                        leftNode = createOneOperandNode(
-                            parts,
-                            startIndex + 1,
-                            startIndex + 1,
-                            parts[startIndex][0]
-                            );
-                    }
-
+                        FirstOperand = createNode(parts, startIndex+1, findNextVariableIndex(parts, startIndex)),
+                        Operation = parts[startIndex][0],
+                    };
+                }
+                else
+                {
+                    throw new ArgumentException("Bad parsing");
                 }
             }
             else
             {
-                int secondOperandIndex = twoOperandOperationIndex + 1;
-
+                throw new ArgumentException("Bad parsing");
             }
-            Node Current = new Node
-            {
-                FirstOperand = leftNode,
-                SecondOperand = rightNode,
-                Operation = Operation
-            };
-            return Current;
         }
         public static Node createTree(string[] parts)
         {
@@ -149,6 +164,7 @@ namespace MathLogicAndAlghTheory
 
             return root;
         }
+        
 
     }
 }

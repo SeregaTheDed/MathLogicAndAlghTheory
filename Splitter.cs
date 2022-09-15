@@ -33,7 +33,7 @@ namespace MathLogicAndAlghTheory
         {
             if (currentSigmaNumber == getSigmaNumber('('))
                 return " " + symbol;
-            if (currentSigmaNumber != lastSigmaNumber)
+            if (currentSigmaNumber != lastSigmaNumber || lastSigmaNumber == getSigmaNumber('-') && currentSigmaNumber == getSigmaNumber('-'))
                 return " " + symbol;
             return symbol;
         }
