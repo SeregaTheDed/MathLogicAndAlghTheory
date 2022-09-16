@@ -19,6 +19,9 @@ namespace MathLogicAndAlghTheory
                     Console.WriteLine("String is a formula. Tree:");
                     var tree = TreeCreator.createTree(Splitter.Split(inputLine));
                     tree.printTree();
+                    Console.WriteLine("Tree without implication:");
+                    tree.removeImplication();
+                    tree.printTree();
 
                 }
                 else
