@@ -59,5 +59,23 @@ namespace MathLogicAndAlghTheory
             }
             return inputWithSpaces.ToString().Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
         }
+        public static string[] SplitWithReplace(string input, Dictionary<string, int> keyValuePairs)
+        {
+            string[] splittedString = Split(input);
+            foreach (var keyValuePair in keyValuePairs)
+            {
+                string variableName = keyValuePair.Key;
+                int variableValue = keyValuePair.Value;
+                if (variableValue > 1 || variableValue < 0)
+                    throw new ArgumentException($"{variableValue} not included in (0,1) set");
+                for (int i = 0; i < splittedString.Length; i++)
+                {
+                    if (splittedString[i] == variableName)
+                        splittedString[i] = "" + variableValue;
+
+                }
+            }
+            return splittedString;
+        }
     }
 }
