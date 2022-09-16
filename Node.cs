@@ -61,6 +61,15 @@ namespace MathLogicAndAlghTheory
             printTreeRecursy(this, 0);
             Console.ForegroundColor = originalConsoleColor;
         }
+        public string getStringFormula()
+        {
+            if (this.isVariable)
+                return this.VariableName;
+            else if (this.isOperationWithOneOperand)
+                return this.Operation + this.FirstOperand.getStringFormula();
+            else
+                return "("+ this.FirstOperand.getStringFormula() + this.Operation + this.SecondOperand.getStringFormula() +")";
+        }
         public void removeImplication()
         {
             if (this.isVariable)

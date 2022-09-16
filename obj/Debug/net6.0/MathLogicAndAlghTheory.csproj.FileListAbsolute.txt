@@ -1,0 +1,15 @@
+C:\Users\shtan\source\repos\MathLogicAndAlghTheory\bin\Debug\net6.0\MathLogicAndAlghTheory.exe
+C:\Users\shtan\source\repos\MathLogicAndAlghTheory\bin\Debug\net6.0\MathLogicAndAlghTheory.deps.json
+C:\Users\shtan\source\repos\MathLogicAndAlghTheory\bin\Debug\net6.0\MathLogicAndAlghTheory.runtimeconfig.json
+C:\Users\shtan\source\repos\MathLogicAndAlghTheory\bin\Debug\net6.0\MathLogicAndAlghTheory.dll
+C:\Users\shtan\source\repos\MathLogicAndAlghTheory\bin\Debug\net6.0\MathLogicAndAlghTheory.pdb
+C:\Users\shtan\source\repos\MathLogicAndAlghTheory\obj\Debug\net6.0\MathLogicAndAlghTheory.csproj.AssemblyReference.cache
+C:\Users\shtan\source\repos\MathLogicAndAlghTheory\obj\Debug\net6.0\MathLogicAndAlghTheory.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shtan\source\repos\MathLogicAndAlghTheory\obj\Debug\net6.0\MathLogicAndAlghTheory.AssemblyInfoInputs.cache
+C:\Users\shtan\source\repos\MathLogicAndAlghTheory\obj\Debug\net6.0\MathLogicAndAlghTheory.AssemblyInfo.cs
+C:\Users\shtan\source\repos\MathLogicAndAlghTheory\obj\Debug\net6.0\MathLogicAndAlghTheory.csproj.CoreCompileInputs.cache
+C:\Users\shtan\source\repos\MathLogicAndAlghTheory\obj\Debug\net6.0\MathLogicAndAlghTheory.dll
+C:\Users\shtan\source\repos\MathLogicAndAlghTheory\obj\Debug\net6.0\refint\MathLogicAndAlghTheory.dll
+C:\Users\shtan\source\repos\MathLogicAndAlghTheory\obj\Debug\net6.0\MathLogicAndAlghTheory.pdb
+C:\Users\shtan\source\repos\MathLogicAndAlghTheory\obj\Debug\net6.0\MathLogicAndAlghTheory.genruntimeconfig.cache
+C:\Users\shtan\source\repos\MathLogicAndAlghTheory\obj\Debug\net6.0\ref\MathLogicAndAlghTheory.dll

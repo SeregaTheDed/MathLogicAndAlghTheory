@@ -12,8 +12,8 @@ namespace MathLogicAndAlghTheory
         {
             foreach (var inputLine in FileReader.getFormuls())
             {
-                Console.WriteLine("-------------------");
-                Console.WriteLine("Input string: "+ inputLine);
+                Console.WriteLine("------------------------------------");
+                Console.WriteLine("Input string: " + inputLine);
                 if (Validator.Validate(inputLine))
                 {
                     Console.WriteLine("String is a formula. Tree:");
@@ -22,6 +22,8 @@ namespace MathLogicAndAlghTheory
                     Console.WriteLine("Tree without implication:");
                     tree.removeImplication();
                     tree.printTree();
+                    Console.WriteLine("Formula without implication: ");
+                    Console.WriteLine(tree.getStringFormula());
 
                 }
                 else
