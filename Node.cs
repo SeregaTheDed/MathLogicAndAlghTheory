@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace MathLogicAndAlghTheory
 {
-    public class Node
+    public class Node : ICloneable
     {
         public bool isVariable
         {
@@ -87,6 +88,11 @@ namespace MathLogicAndAlghTheory
                 this.FirstOperand.removeImplication();
                 this.SecondOperand.removeImplication();
             }
+        }
+
+        public object Clone()
+        {
+            return JsonSerializer.Deserialize<Node>(JsonSerializer.Serialize(this));
         }
     }
 

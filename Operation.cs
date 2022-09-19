@@ -11,7 +11,7 @@ namespace MathLogicAndAlghTheory
     {
         public static int getResult(this Node node)
         {
-            if (node.isOperation)
+            if (node.isVariable)
                 return int.Parse(node.VariableName);
             char operation = node.Operation.Value;
             switch (operation)
@@ -48,7 +48,7 @@ namespace MathLogicAndAlghTheory
         }
         public static int doImplication(Node node)
         {
-            if (getResult(node.FirstOperand) == 0 && getResult(node.SecondOperand) == 1)
+            if (getResult(node.FirstOperand) == 1 && getResult(node.SecondOperand) == 0)
                 return 0;
             else
                 return 1;

@@ -10,7 +10,7 @@ namespace MathLogicAndAlghTheory
     {
         public static void Task1()
         {
-            foreach (var inputLine in FileReader.getFormuls())
+            foreach (var inputLine in FileReader.getFormulsFromProof())
             {
                 Console.WriteLine("------------------------------------");
                 Console.WriteLine("Input string: " + inputLine);
@@ -19,11 +19,11 @@ namespace MathLogicAndAlghTheory
                     Console.WriteLine("String is a formula. Tree:");
                     var tree = TreeCreator.createTree(Splitter.Split(inputLine));
                     tree.printTree();
-                    Console.WriteLine("Tree without implication:");
+                    /*Console.WriteLine("Tree without implication:");
                     tree.removeImplication();
                     tree.printTree();
                     Console.WriteLine("Formula without implication: ");
-                    Console.WriteLine(tree.getStringFormula());
+                    Console.WriteLine(tree.getStringFormula());*/
 
                 }
                 else
@@ -33,5 +33,25 @@ namespace MathLogicAndAlghTheory
                 
             }
         }
+        public static void Task2()
+        {
+            string[] formuls = FileReader.getFormulsFromEquals();
+            if (!Validator.Validate(formuls[0]))
+            {
+                Console.WriteLine(formuls[0] + " is not a formula");
+                return;
+            }
+            if (!Validator.Validate(formuls[1]))
+            {
+                Console.WriteLine(formuls[1] + " is not a formula");
+                return;
+            }
+            Table table1 = new Table(TreeCreator.createTree(Splitter.Split(formuls[0])));
+            Table table2 = new Table(TreeCreator.createTree(Splitter.Split(formuls[1])));
+            Console.WriteLine(formuls[0]);
+            Console.WriteLine(table1 == table2 ? "equal":"not equal");
+            Console.WriteLine(formuls[1]);
+        }
+
     }
 }

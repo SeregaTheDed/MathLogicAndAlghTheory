@@ -59,7 +59,7 @@ namespace MathLogicAndAlghTheory
             }
             return inputWithSpaces.ToString().Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
         }
-        public static string[] SplitWithReplace(string input, Dictionary<string, int> keyValuePairs)
+        public static string[] SplitWithReplace(string input, SortedDictionary<string, int> keyValuePairs)
         {
             string[] splittedString = Split(input);
             foreach (var keyValuePair in keyValuePairs)

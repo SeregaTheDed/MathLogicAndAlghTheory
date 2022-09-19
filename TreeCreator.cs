@@ -70,6 +70,8 @@ namespace MathLogicAndAlghTheory
                 {
                     int operationIndex = findIndexTwoOperandOperationInRange(parts, startIndex, endIndex);
                     int closeBracketIndex = findCloseBracketIndex(parts, startIndex);
+                    if (closeBracketIndex + 1 < parts.Length && parts[closeBracketIndex + 1].isVariable())
+                        throw new ArgumentException("Bad parsing");
                     Node leftOperand = createNode(parts, startIndex+1, operationIndex-1);
                     Node rightOperand = createNode(parts, operationIndex + 1, closeBracketIndex-1);
                     return new Node
@@ -109,7 +111,11 @@ namespace MathLogicAndAlghTheory
 
             return root;
         }
-        
+        public static Node createTree(string formula)
+        {
+            return createTree(Splitter.Split(formula));
+        }
+
 
     }
 }
