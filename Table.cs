@@ -18,6 +18,17 @@ namespace MathLogicAndAlghTheory
             _variables = getVariables();
             _table = getTable();
         }
+        public Table(Node root, Node additional_root)
+        {
+            _root = root;
+            _variables = getVariables();
+            foreach (var item in new Table(additional_root).getVariables())
+            {
+                if (!_variables.Contains(item))
+                    _variables.Add(item.Key, item.Value);
+            }
+            _table = getTable();
+        }
         private SortedDictionary<string, int> getVariables()
         {
             SortedDictionary<string, int> variables = new SortedDictionary<string, int>();

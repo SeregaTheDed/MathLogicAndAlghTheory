@@ -46,8 +46,10 @@ namespace MathLogicAndAlghTheory
                 Console.WriteLine(formuls[1] + " is not a formula");
                 return;
             }
-            Table table1 = new Table(TreeCreator.createTree(Splitter.Split(formuls[0])));
-            Table table2 = new Table(TreeCreator.createTree(Splitter.Split(formuls[1])));
+            var tree1 = TreeCreator.createTree(Splitter.Split(formuls[0]));
+            var tree2 = TreeCreator.createTree(Splitter.Split(formuls[1]));
+            Table table1 = new Table(tree1, tree2);
+            Table table2 = new Table(tree2, tree1);
             Console.WriteLine(formuls[0]);
             Console.WriteLine(table1 == table2 ? "equal":"not equal");
             Console.WriteLine(formuls[1]);
