@@ -55,7 +55,7 @@ namespace MathLogicAndAlghTheory
                 throw new ArgumentException();
             }
         }
-        private int[] getTable()
+        private int[] getTable() 
         {
             int rowCount = 1 << _variables.Count;
             var table = new int[rowCount];
@@ -81,10 +81,6 @@ namespace MathLogicAndAlghTheory
         }
         public static bool operator==(Table left, Table right)
         {
-            /*Console.WriteLine(String.Join(" ", left._table));
-            Console.WriteLine(String.Join(" ", left._variables.Keys));
-            Console.WriteLine(String.Join(" ", right._table));
-            Console.WriteLine(String.Join(" ", right._variables.Keys));*/
             if (!left._variables.Keys.SequenceEqual(right._variables.Keys))
                 return false;
             return left._table.SequenceEqual(right._table);

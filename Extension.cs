@@ -44,5 +44,12 @@ namespace MathLogicAndAlghTheory
                 return false;
             return Constants.Sigma3.Contains(line[0]);
         }
+        public static char getReversedOperation(this char operation)
+        {
+            if (operation == '|')
+                return '&';
+            else
+                return '|';
+        }
     }
 }
