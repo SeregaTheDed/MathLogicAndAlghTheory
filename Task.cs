@@ -54,6 +54,31 @@ namespace MathLogicAndAlghTheory
             Console.WriteLine(table1 == table2 ? "equal":"not equal");
             Console.WriteLine(formuls[1]);
         }
+        public static void Task3()
+        {
+            string formula = FileReader.getFormulaFromEquals();
+            if (!Validator.Validate(formula))
+            {
+                Console.WriteLine(formula + " is not a formula");
+                return;
+            }
+            Node input = TreeCreator.createTree(formula);
+            Console.WriteLine("!!!!!Using perfect forms was constructed by truth tables!!!!!");
+            Console.WriteLine("Input:");
+            Console.WriteLine(input);
+            Console.WriteLine("--------------------");
+            Node dnf = TreeCreator.createPerfectDNF(input);
+            Node cnf = TreeCreator.createPerfectCNF(input);
+            Console.WriteLine("DNF:");
+            Console.WriteLine(dnf);
+            Console.WriteLine("DNF tree:");
+            dnf.printTree();
+            Console.WriteLine("--------------------");
+            Console.WriteLine("CNF:");
+            Console.WriteLine(cnf);
+            Console.WriteLine("CNF tree:");
+            cnf.printTree();
+        }
 
     }
 }

@@ -20,6 +20,7 @@ namespace MathLogicAndAlghTheory
                 Console.WriteLine(String.Join("\n", menu));
                 Console.Write("Enter a menu item(1,2,3,4):");
                 string punkt = Console.ReadLine();
+                //string punkt = "3";
                 switch (punkt)
                 {
                     case "1":
@@ -29,7 +30,7 @@ namespace MathLogicAndAlghTheory
                         Task.Task2();
                         break;
                     case "3":
-
+                        Task.Task3();
                         break;
                     case "4":
                         return;

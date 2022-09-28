@@ -97,8 +97,6 @@ namespace MathLogicAndAlghTheory
         }
         private void downAllMinusesRecursy()
         {
-            Console.WriteLine(this.getStringFormula());
-            Console.WriteLine("*************************************");
             if (this.isVariable)
             {
                 return;

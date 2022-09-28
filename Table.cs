@@ -71,8 +71,26 @@ namespace MathLogicAndAlghTheory
                 var currentValue = TreeCreator.createTree(Splitter.SplitWithReplace(_root.getStringFormula(), _variables)).getResult();
                 table[i] = currentValue;
             }
-
             return table;
+        }
+        public IEnumerable<KeyValuePair<SortedDictionary<string, int>, int>> iterateTable()
+        {
+            int rowCount = 1 << _variables.Count;
+            var table = new int[rowCount];
+            for (int i = 0; i < rowCount; i++)
+            {
+                string binaryNumber = getBinaryNumber(_variables.Count, i);
+                int j = 0;
+                foreach (var variableName in _variables.Keys.ToArray())
+                {
+                    _variables[variableName] = binaryNumber[j] - '0';
+                    j++;
+                }
+                var currentValue = TreeCreator.createTree(Splitter.SplitWithReplace(_root.getStringFormula(), _variables)).getResult();
+                table[i] = currentValue;
+                yield return new KeyValuePair<SortedDictionary<string, int>, int>(_variables, currentValue);
+            }
+            yield break;
         }
 
         private string getBinaryNumber(int length, int number)

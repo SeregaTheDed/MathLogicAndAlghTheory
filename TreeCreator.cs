@@ -115,7 +115,79 @@ namespace MathLogicAndAlghTheory
         {
             return createTree(Splitter.Split(formula));
         }
+        private static string getVariableOfNegativeVariable(KeyValuePair<string, int> kvp, bool reverse = false)
+        {
+            if (reverse)
+            {
+                if (kvp.Value == 0)
+                    return kvp.Key;
+                else
+                    return "-" + kvp.Key;
+            }
+            else
+            {
+                if (kvp.Value == 0)
+                    return "-" + kvp.Key;
+                else
+                    return kvp.Key;
+            }
+           
+        }
+        private static string getPrimeConjunctiveFromTableLine(SortedDictionary<string, int> variables)
+        {
+            string formula = "";
+            foreach (var kvp in variables)
+            {
+                if (formula == "")
+                    formula = getVariableOfNegativeVariable(kvp);
+                else
+                    formula = $"({formula}&{getVariableOfNegativeVariable(kvp)})";
+            }
+            return formula;
+        }
+        public static Node createPerfectDNF(Node root)
+        {
+            string formula = "";
+            foreach (var kvp in new Table(root).iterateTable())
+            {
+                if (kvp.Value == 1)
+                {
+                    if (formula == "")
+                        formula = getPrimeConjunctiveFromTableLine(kvp.Key);
+                    else
+                        formula = $"({formula}|{getPrimeConjunctiveFromTableLine(kvp.Key)})";
+                }
+            }
+            return createTree(formula);
+        }
 
+        private static string getPrimeDisjunctionFromTableLine(SortedDictionary<string, int> variables)
+        {
+            string formula = "";
+            foreach (var kvp in variables)
+            {
+                if (formula == "")
+                    formula = getVariableOfNegativeVariable(kvp, true);
+                else
+                    formula = $"({formula}|{getVariableOfNegativeVariable(kvp, true)})";
+            }
+            return formula;
+        }
+        public static Node createPerfectCNF(Node root)
+        {
+            string formula = "";
+            foreach (var kvp in new Table(root).iterateTable())
+            {
+                if (kvp.Value == 0)
+                {
+                    if (formula == "")
+                        formula = getPrimeDisjunctionFromTableLine(kvp.Key);
+                    else
+                        formula = $"({formula}&{getPrimeDisjunctionFromTableLine(kvp.Key)})";
+                }
+            }
+            return createTree(formula);
+        }
 
     }
 }
