@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -79,12 +80,19 @@ namespace MathLogicAndAlghTheory
                 Console.WriteLine(perfectDNF);
                 Console.WriteLine("Perfect DNF tree:");
                 perfectDNF.printTree();
+                //Console.WriteLine(dnf.Equals(perfectDNF));
             }
             catch (Exception)
             {
                 Console.WriteLine("Perfect DNF not exists");
             }
             Console.WriteLine("--------------------");
+            Node cnf = TreeCreator.createTree("--"+dnf.ToString());
+            cnf.FirstOperand.downAllMinuses();
+            Console.WriteLine("CNF:");
+            Console.WriteLine(cnf);
+            Console.WriteLine("CNF tree:");
+            cnf.printTree();
             try
             {
                 Node perfectCNF = TreeCreator.createPerfectCNF(input);
@@ -92,12 +100,13 @@ namespace MathLogicAndAlghTheory
                 Console.WriteLine(perfectCNF);
                 Console.WriteLine("Perfect CNF tree:");
                 perfectCNF.printTree();
+                //Console.WriteLine(cnf.Equals(perfectCNF));
             }
             catch (Exception)
             {
                 Console.WriteLine("Perfect CNF not exists");
             }
-            
+            //Console.WriteLine(dnf.Equals(cnf));
         }
 
     }
