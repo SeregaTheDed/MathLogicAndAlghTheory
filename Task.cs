@@ -67,17 +67,32 @@ namespace MathLogicAndAlghTheory
             Console.WriteLine("Input:");
             Console.WriteLine(input);
             Console.WriteLine("--------------------");
-            Node dnf = TreeCreator.createPerfectDNF(input);
-            Node cnf = TreeCreator.createPerfectCNF(input);
-            Console.WriteLine("DNF:");
-            Console.WriteLine(dnf);
-            Console.WriteLine("DNF tree:");
-            dnf.printTree();
+            try
+            {
+                Node dnf = TreeCreator.createPerfectDNF(input);
+                Console.WriteLine("DNF:");
+                Console.WriteLine(dnf);
+                Console.WriteLine("DNF tree:");
+                dnf.printTree();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Perfect DNF not exists");
+            }
             Console.WriteLine("--------------------");
-            Console.WriteLine("CNF:");
-            Console.WriteLine(cnf);
-            Console.WriteLine("CNF tree:");
-            cnf.printTree();
+            try
+            {
+                Node cnf = TreeCreator.createPerfectCNF(input);
+                Console.WriteLine("CNF:");
+                Console.WriteLine(cnf);
+                Console.WriteLine("CNF tree:");
+                cnf.printTree();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Perfect CNF not exists");
+            }
+            
         }
 
     }
