@@ -63,17 +63,22 @@ namespace MathLogicAndAlghTheory
                 return;
             }
             Node input = TreeCreator.createTree(formula);
-            Console.WriteLine("!!!!!Using perfect forms was constructed by truth tables!!!!!");
+            Console.WriteLine("!!!!!Perfect forms were constructed by truth tables!!!!!");
             Console.WriteLine("Input:");
             Console.WriteLine(input);
             Console.WriteLine("--------------------");
+            Node dnf = TreeCreator.createDNF(input);
+            Console.WriteLine("DNF:");
+            Console.WriteLine(dnf);
+            Console.WriteLine("DNF tree:");
+            dnf.printTree();
             try
             {
-                Node dnf = TreeCreator.createPerfectDNF(input);
-                Console.WriteLine("DNF:");
-                Console.WriteLine(dnf);
-                Console.WriteLine("DNF tree:");
-                dnf.printTree();
+                Node perfectDNF = TreeCreator.createPerfectDNF(input);
+                Console.WriteLine("Perfect DNF:");
+                Console.WriteLine(perfectDNF);
+                Console.WriteLine("Perfect DNF tree:");
+                perfectDNF.printTree();
             }
             catch (Exception)
             {
@@ -82,11 +87,11 @@ namespace MathLogicAndAlghTheory
             Console.WriteLine("--------------------");
             try
             {
-                Node cnf = TreeCreator.createPerfectCNF(input);
-                Console.WriteLine("CNF:");
-                Console.WriteLine(cnf);
-                Console.WriteLine("CNF tree:");
-                cnf.printTree();
+                Node perfectCNF = TreeCreator.createPerfectCNF(input);
+                Console.WriteLine("Perfect CNF:");
+                Console.WriteLine(perfectCNF);
+                Console.WriteLine("Perfect CNF tree:");
+                perfectCNF.printTree();
             }
             catch (Exception)
             {

@@ -115,6 +115,79 @@ namespace MathLogicAndAlghTheory
         {
             return createTree(Splitter.Split(formula));
         }
+        private static int _upDisjunctionCount = 0;
+        private static void upDisjunction(Node node)
+        {
+            if (node.isVariable)
+            {
+                return;
+            }
+            else if (node.isOperationWithOneOperand)
+            {
+                upDisjunction(node.FirstOperand);
+                return;
+            }
+            else 
+            {
+                if (node.Operation == '&' && node.FirstOperand.Operation == '|')
+                {
+                    var a1 = node.FirstOperand.FirstOperand;
+                    var a2 = node.FirstOperand.SecondOperand;
+                    var a3 = node.SecondOperand;
+                    node.Operation = '|';
+                    node.FirstOperand = new Node
+                    {
+                        FirstOperand = a1,
+                        SecondOperand = (Node)a3.Clone(),
+                        Operation = '&'
+                    };
+                    node.SecondOperand = new Node
+                    {
+                        FirstOperand = a2,
+                        SecondOperand = a3,
+                        Operation = '&'
+                    };
+                    _upDisjunctionCount++;
+                }
+                else if (node.Operation == '&' && node.SecondOperand.Operation == '|')
+                {
+                    var a1 = node.SecondOperand.FirstOperand;
+                    var a2 = node.SecondOperand.SecondOperand;
+                    var a3 = node.FirstOperand;
+                    node.Operation = '|';
+                    node.FirstOperand = new Node
+                    {
+                        FirstOperand = a1,
+                        SecondOperand = (Node)a3.Clone(),
+                        Operation = '&'
+                    };
+                    node.SecondOperand = new Node
+                    {
+                        FirstOperand = a2,
+                        SecondOperand = a3,
+                        Operation = '&'
+                    };
+                    _upDisjunctionCount++;
+                }
+                upDisjunction(node.FirstOperand);
+                upDisjunction(node.SecondOperand);
+            }
+
+        }
+        public static Node createDNF(Node root)
+        {
+            Node result = (Node)root.Clone();
+            result.removeImplication();
+            result.downAllMinuses();
+            int lastCount = -1;
+            _upDisjunctionCount = 0;
+            while (lastCount != _upDisjunctionCount)
+            {
+                upDisjunction(result);
+                lastCount = _upDisjunctionCount;
+            }
+            return result;
+        }
         private static string getVariableOfNegativeVariable(KeyValuePair<string, int> kvp, bool reverse = false)
         {
             if (reverse)
@@ -160,7 +233,6 @@ namespace MathLogicAndAlghTheory
             }
             return createTree(formula);
         }
-
         private static string getPrimeDisjunctionFromTableLine(SortedDictionary<string, int> variables)
         {
             string formula = "";

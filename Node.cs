@@ -126,7 +126,7 @@ namespace MathLogicAndAlghTheory
                     this.SecondOperand.addMinus();
                     this.Operation = next.Operation.Value.getReversedOperation();
                     this.FirstOperand.downAllMinusesRecursy();
-                    this.FirstOperand.downAllMinusesRecursy();
+                    this.SecondOperand.downAllMinusesRecursy();
                 }
             }
         }
