@@ -143,6 +143,7 @@ namespace MathLogicAndAlghTheory
         {
             this.removeImplication();
             this.downAllMinusesRecursy();
+            this.downAllMinusesRecursy();
         }
 
         public object Clone()

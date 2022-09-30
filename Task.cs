@@ -87,12 +87,15 @@ namespace MathLogicAndAlghTheory
                 Console.WriteLine("Perfect DNF not exists");
             }
             Console.WriteLine("--------------------");
-            Node cnf = TreeCreator.createTree("--"+dnf.ToString());
-            cnf.FirstOperand.downAllMinuses();
+            Node cnf = TreeCreator.createTree("-"+input.ToString());
+            Node cnf2 = TreeCreator.createDNF(cnf);
+            Node cnf3 = TreeCreator.createTree("-"+ cnf2.ToString());
+            cnf3.downAllMinuses();
+            //Node cnf4 = TreeCreator.createDNF(cnf3);
             Console.WriteLine("CNF:");
-            Console.WriteLine(cnf);
+            Console.WriteLine(cnf3);
             Console.WriteLine("CNF tree:");
-            cnf.printTree();
+            cnf3.printTree();
             try
             {
                 Node perfectCNF = TreeCreator.createPerfectCNF(input);
@@ -106,7 +109,7 @@ namespace MathLogicAndAlghTheory
             {
                 Console.WriteLine("Perfect CNF not exists");
             }
-            //Console.WriteLine(dnf.Equals(cnf));
+            Console.WriteLine(dnf.Equals(cnf3));
         }
 
     }
